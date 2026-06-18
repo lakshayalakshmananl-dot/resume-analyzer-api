@@ -1,6 +1,10 @@
 from fastapi import FastAPI
 from app.routers import resumes, analyses
 from app.routers.users import router as users_router  # ← add this
+from app.database import Base, engine
+from app import models
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Resume Analyzer API",
