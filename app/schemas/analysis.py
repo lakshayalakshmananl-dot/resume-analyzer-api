@@ -1,17 +1,15 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from datetime import datetime
 from uuid import UUID
 from typing import Optional, List
 
 
-# What the user sends to trigger analysis
 class AnalysisCreate(BaseModel):
     resume_id: UUID
-    job_description: str
-    job_title: Optional[str] = None
+    job_description: str = Field(min_length=10, max_length=5000)
+    job_title: Optional[str] = Field(None, min_length=2, max_length=100)
 
 
-# What we return to the user
 class AnalysisResponse(BaseModel):
     id: UUID
     resume_id: UUID
@@ -22,16 +20,20 @@ class AnalysisResponse(BaseModel):
     suggestions: List[str]
     created_at: datetime
 
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
 
 
-# What we return in a list
 class AnalysisListResponse(BaseModel):
     id: UUID
     job_title: Optional[str] = None
     score: int
     created_at: datetime
 
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
+
+
+class PaginatedAnalyses(BaseModel):
+    total: int
+    skip: int
+    limit: int
+    items: List[AnalysisListResponse]
