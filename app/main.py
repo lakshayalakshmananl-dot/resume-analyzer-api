@@ -8,7 +8,7 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Resume Analyzer API",
-    description="Upload a PDF resume and score it against a job description using  Groq LLM (llama-3.3-70b-versatile)"",
+    description="Upload a PDF resume and score it against a job description using  Groq LLM (llama-3.3-70b-versatile)",
     version="1.0.0",
 )
 
