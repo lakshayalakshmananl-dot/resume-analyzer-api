@@ -8,7 +8,7 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Resume Analyzer API",
-    description="Upload a PDF resume and score it against a job description using Mistral-7B",
+    description="Upload a PDF resume and score it against a job description using  Groq LLM (llama-3.3-70b-versatile)"",
     version="1.0.0",
 )
 
@@ -22,4 +22,4 @@ def root():
 
 @app.get("/health", tags=["Health"])
 def health():
-    return {"status": "ok", "database": "connected", "llm": "huggingface/mistral-7b"}
+    return {"status": "ok", "database": "connected", "llm": "groq/llama-3.3-70b-versatile"}
